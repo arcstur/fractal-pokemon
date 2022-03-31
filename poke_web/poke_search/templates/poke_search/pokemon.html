@@ -1,0 +1,11 @@
+{% extends "poke_search/base.html" %}
+{% block content %}
+    <h1>{{ pokemon.name }}</h1>
+    <ul>
+        {% if pokemon.type2 %}
+            <li> Tipos: {{ pokemon.type1 }} / {{ pokemon.type2 }} </li>
+        {% else %}
+            <li> Tipo: {{ pokemon.type1 }} </li>
+        {% endif %}
+    </ul>
+{% endblock content %}

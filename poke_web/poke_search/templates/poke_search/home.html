@@ -1,28 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oie</title>
-</head>
-<body>
+{% extends "poke_search/base.html" %}
+{% block content %}
     <h2> Resultado </h2>
     {% if pokemon_list %}
         <ol>
         {% for pokemon in pokemon_list %}
-            <li>{{ pokemon.name }}</li>
-            <ul>
-                {% if pokemon.type2 %}
-                    <li> Tipos: {{ pokemon.type1 }} / {{ pokemon.type2 }} </li>
-                {% else %}
-                    <li> Tipo: {{ pokemon.type1 }} </li>
-                {% endif %}
-            </ul>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ pokemon.name }}</h5>
+                    {% if pokemon.type2 %}
+                        <h6 class="card-subtitle mb-2 text-muted">{{ pokemon.type1 }} / {{ pokemon.type2 }}</h6>
+                    {% else %}
+                        <h6 class="card-subtitle mb-2 text-muted">{{ pokemon.type1 }}</h6>
+                    {% endif %}
+                </div>
+            </div>
         {% endfor %}
         </ol>
     {% else %}
         <p>Nenhum pokémon foi encontrado.</p>
     {% endif %}
-</body>
-</html>
+{% endblock content %}
