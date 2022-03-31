@@ -3,17 +3,25 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-pokemons = [
+pokemon_list = [
     {
         'name': 'bulbasaur',
         'type1': 'grass',
         'type2': 'poison'
+    },
+    {
+        'name': 'charmander',
+        'type1': 'fire',
+        'type2': ''
     }
 
 ]
 
 def home(request):
-    return render(request, 'poke_search/home.html')
+    context = {
+        'pokemon_list': pokemon_list,
+    }
+    return render(request, 'poke_search/home.html', context)
 
 def about(request):
     return HttpResponse('<h1>Sobre</h1>')
