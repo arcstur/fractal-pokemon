@@ -13,7 +13,7 @@ pokemons = [
 ]
 
 def home(request):
-    return HttpResponse('<h1>Oiê!</h1>')
+    return render(request, 'poke_search/home.html')
 
 def about(request):
     return HttpResponse('<h1>Sobre</h1>')
