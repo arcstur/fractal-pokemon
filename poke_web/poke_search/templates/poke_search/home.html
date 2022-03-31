@@ -1,22 +1,36 @@
 {% extends "poke_search/base.html" %}
 {% block content %}
-    <h2> Resultado </h2>
-    {% if pokemon_list %}
-        <ol>
-        {% for pokemon in pokemon_list %}
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">{{ pokemon.name }}</h5>
-                    {% if pokemon.type2 %}
-                        <h6 class="card-subtitle mb-2 text-muted">{{ pokemon.type1 }} / {{ pokemon.type2 }}</h6>
-                    {% else %}
-                        <h6 class="card-subtitle mb-2 text-muted">{{ pokemon.type1 }}</h6>
-                    {% endif %}
+<h2> Resultado </h2>
+{% if pokemon_list %}
+    {% for pokemon in pokemon_list %}
+    <div class="card">
+        <div class="card-body" >
+            {% if pokemon.type2 %}
+            <h5 class="card-title">{{ pokemon.name }}
+                <span class="badge badge-primary">{{ pokemon.type1 }}</span>
+                <span class="badge badge-primary">{{ pokemon.type2 }}</span>
+            </h5>
+            {% else %}
+            <h5 class="card-title">{{ pokemon.name }}
+                <span class="badge badge-primary">{{ pokemon.type1 }}</span>
+            </h5>
+            {% endif %}
+
+            <p>
+            <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#{{pokemon.name}}" aria-expanded="false" aria-controls="{{pokemon.name}}">
+                Info
+            </button>
+            </p>
+
+            <div class="collapse" id="{{pokemon.name}}">
+                <div class="card card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
                 </div>
             </div>
-        {% endfor %}
-        </ol>
-    {% else %}
-        <p>Nenhum pokémon foi encontrado.</p>
-    {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <p>Nenhum pokémon foi encontrado.</p>
+{% endif %}
 {% endblock content %}

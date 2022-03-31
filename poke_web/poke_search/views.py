@@ -5,12 +5,12 @@ from django.http import HttpResponse
 
 pokemon_list = [
     {
-        'name': 'bulbasaur',
+        'name': 'Bulbasaur',
         'type1': 'grass',
         'type2': 'poison'
     },
     {
-        'name': 'charmander',
+        'name': 'Charmander',
         'type1': 'fire',
         'type2': ''
     }
