@@ -3,30 +3,53 @@
 <h2> Resultado </h2>
 {% if pokemon_list %}
     {% for pokemon in pokemon_list %}
-    <div class="card">
-        <div class="card-body" >
-            {% if pokemon.type2 %}
-            <h5 class="card-title">{{ pokemon.name }}
-                <span class="badge badge-primary">{{ pokemon.type1 }}</span>
-                <span class="badge badge-primary">{{ pokemon.type2 }}</span>
-            </h5>
-            {% else %}
-            <h5 class="card-title">{{ pokemon.name }}
-                <span class="badge badge-primary">{{ pokemon.type1 }}</span>
-            </h5>
-            {% endif %}
+    <div class="card mb-3">
+        <div class="row no-gutters">
+        <div class="col-md-1">
+            <img src="{{ pokemon.img }}" class="card-img-top" alt="{{pokemon.name}}" style="max-height: 100px; width: auto; ">
+        </div>
+        <div class="col-md-11">
+            <div class="card-body" >
+                {% if pokemon.type2 %}
+                <h5 class="card-title">{{ pokemon.name }}
+                    <span class="badge badge-primary">{{ pokemon.type1 }}</span>
+                    <span class="badge badge-primary">{{ pokemon.type2 }}</span>
+                </h5>
+                {% else %}
+                <h5 class="card-title">{{ pokemon.name }}
+                    <span class="badge badge-primary">{{ pokemon.type1 }}</span>
+                </h5>
+                {% endif %}
 
-            <p>
-            <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#{{pokemon.name}}" aria-expanded="false" aria-controls="{{pokemon.name}}">
-                Info
-            </button>
-            </p>
+                <p>
+                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#{{pokemon.name}}" aria-expanded="false" aria-controls="{{pokemon.name}}">
+                    Info
+                </button>
+                </p>
 
-            <div class="collapse" id="{{pokemon.name}}">
-                <div class="card card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                <div class="collapse" id="{{pokemon.name}}">
+                    <div class="card card-body">
+                        <ul>
+                            <li>Nome: {{ pokemon.name }}</li>
+                            {% if pokemon.type2 %}
+                            <li>Tipos: {{ pokemon.type1 }} / {{ pokemon.type2 }}</li>
+                            {% else %}
+                            <li>Tipo: {{ pokemon.type1 }}</li>
+                            {% endif %}
+                            <li>Atributos </li>
+                            <ul>
+                                <li>HP: {{ pokemon.stats.hp }}</li>
+                                <li>Ataque: {{ pokemon.stats.attack }}</li>
+                                <li>Ataque especial: {{ pokemon.stats.special_attack }}</li>
+                                <li>Defesa: {{ pokemon.stats.defense }}</li>
+                                <li>Defesa especial: {{ pokemon.stats.special_defense }}</li>
+                                <li>Velocidade: {{ pokemon.stats.speed }}</li>
+                            </ul>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
     {% endfor %}

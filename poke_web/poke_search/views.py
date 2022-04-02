@@ -7,12 +7,32 @@ pokemon_list = [
     {
         'name': 'Bulbasaur',
         'type1': 'grass',
-        'type2': 'poison'
+        'type2': 'poison',
+        'stats': {
+            'hp': 62,
+            'attack': 62,
+            'defense': 32,
+            'special_attack': 33,
+            'special_defense': 17,
+            'speed': 25
+        },
+        'img': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
+        'img_shiny': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png',
     },
     {
         'name': 'Charmander',
         'type1': 'fire',
-        'type2': ''
+        'type2': '',
+        'stats': {
+            'hp': 62,
+            'attack': 62,
+            'defense': 32,
+            'special_attack': 33,
+            'special_defense': 17,
+            'speed': 25
+        },
+        'img': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
+        'img_shiny': 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/4.png',
     }
 
 ]
