@@ -1,59 +1,101 @@
 {% extends "poke_search/base.html" %}
 {% block content %}
-<h2> Resultado </h2>
-{% if pokemon_list %}
-    {% for pokemon in pokemon_list %}
-    <div class="card mb-3">
-        <div class="row no-gutters">
-        <div class="col-md-1">
-            <img src="{{ pokemon.img }}" class="card-img-top" alt="{{pokemon.name}}" style="max-height: 100px; width: auto; ">
-        </div>
-        <div class="col-md-11">
-            <div class="card-body" >
-                {% if pokemon.type2 %}
-                <h5 class="card-title">{{ pokemon.name }}
-                    <span class="badge badge-primary">{{ pokemon.type1 }}</span>
-                    <span class="badge badge-primary">{{ pokemon.type2 }}</span>
-                </h5>
-                {% else %}
-                <h5 class="card-title">{{ pokemon.name }}
-                    <span class="badge badge-primary">{{ pokemon.type1 }}</span>
-                </h5>
-                {% endif %}
+<p>
+    <form method="get">
+        <input type="text" name="search_name"/>
+        <button type="submit">Pesquisar</button>
+    </form>
+</p>
+{% if search_name %}
+    <h2> Resultado </h2>
+    {% if pokemon_list %}
+        {% for pokemon in pokemon_list %}
+        <div class="card mb-3">
+            <div class="row no-gutters">
+            <div class="col-md-1">
+                <img src="{{ pokemon.img }}" class="card-img-top" alt="{{pokemon.name}}" style="max-height: 100px; width: auto; ">
+            </div>
+            <div class="col-md-11">
+                <div class="card-body" >
+                    {% if pokemon.type2 %}
+                    <h5 class="card-title">{{ pokemon.name }}
+                        <span class="badge badge-primary">{{ pokemon.type1 }}</span>
+                        <span class="badge badge-primary">{{ pokemon.type2 }}</span>
+                    </h5>
+                    {% else %}
+                    <h5 class="card-title">{{ pokemon.name }}
+                        <span class="badge badge-primary">{{ pokemon.type1 }}</span>
+                    </h5>
+                    {% endif %}
 
-                <p>
-                <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#{{pokemon.name}}" aria-expanded="false" aria-controls="{{pokemon.name}}">
-                    Info
-                </button>
-                </p>
+                    <p>
+                    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#{{pokemon.name}}" aria-expanded="false" aria-controls="{{pokemon.name}}">
+                        Info
+                    </button>
+                    </p>
 
-                <div class="collapse" id="{{pokemon.name}}">
-                    <div class="card card-body">
-                        <ul>
-                            <li>Nome: {{ pokemon.name }}</li>
-                            {% if pokemon.type2 %}
-                            <li>Tipos: {{ pokemon.type1 }} / {{ pokemon.type2 }}</li>
-                            {% else %}
-                            <li>Tipo: {{ pokemon.type1 }}</li>
-                            {% endif %}
-                            <li>Atributos </li>
+                    <div class="collapse" id="{{pokemon.name}}">
+                        {% if pokemon.img_shiny %}
+                            <img src="{{ pokemon.img_shiny }}" alt="shiny {{pokemon.name}}" style="max-height: 100px; width: auto">
+                        {% endif %}
+                        {% if pokemon.img_female %}
+                            <img src="{{ pokemon.img_female }}" alt="shiny {{pokemon.name}}" style="max-height: 100px; width: auto">
+                        {% endif %}
+                        <div class="card card-body">
                             <ul>
-                                <li>HP: {{ pokemon.stats.hp }}</li>
-                                <li>Ataque: {{ pokemon.stats.attack }}</li>
-                                <li>Ataque especial: {{ pokemon.stats.special_attack }}</li>
-                                <li>Defesa: {{ pokemon.stats.defense }}</li>
-                                <li>Defesa especial: {{ pokemon.stats.special_defense }}</li>
-                                <li>Velocidade: {{ pokemon.stats.speed }}</li>
+                                <li>Nome: {{ pokemon.name }}</li>
+
+
+                                {% if pokemon.type2 %}
+                                <li>Tipos: {{ pokemon.type1 }} / {{ pokemon.type2 }}</li>
+                                {% else %}
+                                <li>Tipo: {{ pokemon.type1 }}</li>
+                                {% endif %}
+
+                                {% if pokemon.genders.masc and pokemon.genders.fem %}
+                                <li>Gêneros: masculino e feminino</li>
+                                {% elif pokemon.genders.masc %}
+                                <li>Gênero: masculino</li>
+                                {% elif pokemon.genders.fem %}
+                                <li>Gênero: feminino</li>
+                                {% elif pokemon.genders.genderless %}
+                                <li>Gênero: sem gênero</li>
+                                {% endif %}
+
+
+                                <li>Atributos </li>
+                                <ul>
+                                    <li>HP: {{ pokemon.stats.hp }}</li>
+                                    <li>Ataque: {{ pokemon.stats.attack }}</li>
+                                    <li>Ataque especial: {{ pokemon.stats.special_attack }}</li>
+                                    <li>Defesa: {{ pokemon.stats.defense }}</li>
+                                    <li>Defesa especial: {{ pokemon.stats.special_defense }}</li>
+                                    <li>Velocidade: {{ pokemon.stats.speed }}</li>
+                                </ul>
+
+                                {% if pokemon.evolves_from %}
+                                <li>Evolve de: {{ pokemon.evolves_from }}</li>
+                                {% else %}
+                                <li>Evolve de: nenhum</li>
+                                {% endif %}
+
+                                {% if pokemon.evolves_to %}
+                                <li>Evolve para: {{ pokemon.evolves_to }}</li>
+                                {% else %}
+                                <li>Evolve para: nenhum</li>
+                                {% endif %}
                             </ul>
-                        </ul>
+
+                            
+                        </div>
                     </div>
                 </div>
             </div>
+            </div>
         </div>
-        </div>
-    </div>
-    {% endfor %}
-{% else %}
-    <p>Nenhum pokémon foi encontrado.</p>
+        {% endfor %}
+    {% else %}
+        <p>Nenhum pokémon foi encontrado.</p>
+    {% endif %}
 {% endif %}
 {% endblock content %}
