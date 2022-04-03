@@ -42,7 +42,7 @@ def get_description(species_json):
         lang = entry['language']['name']
 
         if lang in ('en', 'pt') or (i+1 == len(entries)):
-            return entry['flavor_text'].replace('\x0c', ' '), lang
+            return entry['flavor_text'].replace('\x0c', ' ').replace('\n', ' '), lang
 
 
 def get_poke_from_json(poke_json):
@@ -84,6 +84,7 @@ def get_poke_from_json(poke_json):
     # Gender Img
     if species_json['has_gender_differences']:
         poke['img_female'] = poke_json['sprites']['front_female']
+        poke['img_shiny_female'] = poke_json['sprites']['front_shiny_female']
 
     # Evolves From
     evolves_from = species_json['evolves_from_species']

@@ -19,7 +19,7 @@
         <div class="card mb-3">
             <div class="row no-gutters">
             <div class="col-md-1">
-                <img src="{{ pokemon.img }}" class="card-img-top" alt="{{pokemon.name}}" style="max-height: 100px; width: auto; ">
+                <img id="pokemonImg" src="{{ pokemon.img }}" class="card-img-top" alt="{{pokemon.name}}" style="max-height: 100px; width: auto; ">
             </div>
             <div class="col-md-11">
                 <div class="card-body" >
@@ -35,18 +35,32 @@
                     {% endif %}
 
                     <p>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Imagem
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img}}'">Padrão</a>
+                            {% if pokemon.img_female %}
+                            <a class="dropdown-item" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img_female}}'">Feminina</a>
+                            {% endif %}
+                            {% if pokemon.img_shiny %}
+                            <a class="dropdown-item" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img_shiny }}'">Shiny</a>
+                            {% endif %}
+                            {% if pokemon.img_shiny_female%}
+                            <a class="dropdown-item" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img_shiny_female }}'">Shiny Feminina</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    </p>
+
+                    <p>
                     <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#{{pokemon.name}}" aria-expanded="false" aria-controls="{{pokemon.name}}">
                         Info
                     </button>
                     </p>
 
                     <div class="collapse" id="{{pokemon.name}}">
-                        {% if pokemon.img_shiny %}
-                            <img src="{{ pokemon.img_shiny }}" alt="shiny {{pokemon.name}}" style="max-height: 100px; width: auto">
-                        {% endif %}
-                        {% if pokemon.img_female %}
-                            <img src="{{ pokemon.img_female }}" alt="shiny {{pokemon.name}}" style="max-height: 100px; width: auto">
-                        {% endif %}
                         <div class="card card-body">
                             {% if pokemon.description %}
                             <p><em>{{ pokemon.description }}</em> ({{pokemon.description_lang}})</p>
