@@ -23,8 +23,6 @@ def get_evolution_chain_json(species_json):
     return response.json()
     
 def get_next_evolution(species_name, chain_list):
-    evolves_to_list = []
-
     if chain_list:
         for chain_item in chain_list:
             if chain_item['species']['name'] == species_name:
@@ -38,7 +36,13 @@ def get_next_evolution(species_name, chain_list):
     else:
         return ''
     
+def get_description(species_json):
+    entries = species_json['flavor_text_entries']
+    for i, entry in enumerate(entries):
+        lang = entry['language']['name']
 
+        if lang in ('en', 'pt') or (i+1 == len(entries)):
+            return entry['flavor_text'].replace('\x0c', ' '), lang
 
 
 def get_poke_from_json(poke_json):
@@ -95,9 +99,7 @@ def get_poke_from_json(poke_json):
         poke['evolves_to'] = evolves_to
 
     # Description
-    entry = species_json['flavor_text_entries'][0]
-    description = entry['flavor_text'].replace('\x0c', ' ')
-    description_lang = entry['language']['name']
+    description, description_lang = get_description(species_json)
 
     if description:
         poke['description'] = description
