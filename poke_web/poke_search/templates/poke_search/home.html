@@ -42,6 +42,9 @@
                             <img src="{{ pokemon.img_female }}" alt="shiny {{pokemon.name}}" style="max-height: 100px; width: auto">
                         {% endif %}
                         <div class="card card-body">
+                            {% if pokemon.description %}
+                            <p><em>{{ pokemon.description }}</em> ({{pokemon.description_lang}})</p>
+                            {% endif %}
                             <ul>
                                 <li>Nome: {{ pokemon.name }}</li>
 

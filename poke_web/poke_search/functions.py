@@ -94,6 +94,15 @@ def get_poke_from_json(poke_json):
     if evolves_to:
         poke['evolves_to'] = evolves_to
 
+    # Description
+    entry = species_json['flavor_text_entries'][0]
+    description = entry['flavor_text'].replace('\x0c', ' ')
+    description_lang = entry['language']['name']
+
+    if description:
+        poke['description'] = description
+        poke['description_lang'] = description_lang
+
 
 
     return poke
