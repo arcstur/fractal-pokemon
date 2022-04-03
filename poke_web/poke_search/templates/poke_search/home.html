@@ -2,12 +2,18 @@
 {% block content %}
 <p>
     <form method="get">
-        <input type="text" name="search_name"/>
-        <button type="submit">Pesquisar</button>
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+              <input type="text" class="form-control mb-2" placeholder="Nome do Pokémon" name="search_name">
+            </div>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-2">Pesquisar</button>
+            </div>
+          </div>
     </form>
 </p>
 {% if search_name %}
-    <h2> Resultado </h2>
+    <h3> Resultado </h3>
     {% if pokemon_list %}
         {% for pokemon in pokemon_list %}
         <div class="card mb-3">
