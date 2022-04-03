@@ -26,7 +26,7 @@ def get_next_evolution(species_name, chain_list):
     if chain_list:
         for chain_item in chain_list:
             if chain_item['species']['name'] == species_name:
-                evolves_to_list = [ item['species']['name'] for item in chain_item['evolves_to'] ]
+                evolves_to_list = [ item['species']['name'].capitalize() for item in chain_item['evolves_to'] ]
                 return ", ".join(evolves_to_list)
             
         for chain_item in chain_list:
@@ -89,7 +89,7 @@ def get_poke_from_json(poke_json):
     # Evolves From
     evolves_from = species_json['evolves_from_species']
     if evolves_from:
-        poke['evolves_from'] = evolves_from['name']
+        poke['evolves_from'] = evolves_from['name'].capitalize()
 
     # Evolves to
     evolution_chain_json = get_evolution_chain_json(species_json)
