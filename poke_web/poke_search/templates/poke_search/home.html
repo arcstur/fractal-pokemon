@@ -13,7 +13,7 @@
     </form>
 </p>
 {% if search_name %}
-    <h3> Resultado </h3>
+    <!-- <h3> Resultado </h3> -->
     {% if pokemon_list %}
         {% for pokemon in pokemon_list %}
         <div class="card mb-3">
@@ -34,25 +34,22 @@
                     </h5>
                     {% endif %}
 
+                    {% if pokemon.img_female or pokemon.img_shiny %}
                     <p>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Imagem
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img}}'">Padrão</a>
-                            {% if pokemon.img_female %}
-                            <a class="dropdown-item" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img_female}}'">Feminina</a>
-                            {% endif %}
-                            {% if pokemon.img_shiny %}
-                            <a class="dropdown-item" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img_shiny }}'">Shiny</a>
-                            {% endif %}
-                            {% if pokemon.img_shiny_female%}
-                            <a class="dropdown-item" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img_shiny_female }}'">Shiny Feminina</a>
-                            {% endif %}
-                        </div>
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img}}'">Padrão</button>
+                        {% if pokemon.img_female %}
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img_female}}'">Feminina</button>
+                        {% endif %}
+                        {% if pokemon.img_shiny %}
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img_shiny }}'">Shiny</button>
+                        {% endif %}
+                        {% if pokemon.img_shiny_female%}
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img_shiny_female }}'">Shiny Feminina</button>
+                        {% endif %}
                     </div>
                     </p>
+                    {% endif %}
 
                     <p>
                     <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#{{pokemon.name}}" aria-expanded="false" aria-controls="{{pokemon.name}}">
