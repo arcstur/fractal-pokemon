@@ -19,7 +19,7 @@
         <div class="card mb-3">
             <div class="row no-gutters">
             <div class="col-md-1">
-                <img id="pokemonImg" src="{{ pokemon.img }}" class="card-img-top" alt="{{pokemon.name}}" style="max-height: 100px; width: auto; ">
+                <img id="{{pokemon.name}}img" src="{{ pokemon.img }}" class="card-img-top" alt="{{pokemon.name}}" style="max-height: 100px; width: auto; ">
             </div>
             <div class="col-md-11">
                 <div class="card-body" >
@@ -37,15 +37,15 @@
                     {% if pokemon.img_female or pokemon.img_shiny %}
                     <p>
                     <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img}}'">Padrão</button>
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('{{pokemon.name}}img').src='{{ pokemon.img}}'">Padrão</button>
                         {% if pokemon.img_female %}
-                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img_female}}'">Feminina</button>
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('{{pokemon.name}}img').src='{{ pokemon.img_female}}'">Feminina</button>
                         {% endif %}
                         {% if pokemon.img_shiny %}
-                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img_shiny }}'">Shiny</button>
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('{{pokemon.name}}img').src='{{ pokemon.img_shiny }}'">Shiny</button>
                         {% endif %}
                         {% if pokemon.img_shiny_female%}
-                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('pokemonImg').src='{{ pokemon.img_shiny_female }}'">Shiny Feminina</button>
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('{{pokemon.name}}img').src='{{ pokemon.img_shiny_female }}'">Shiny Feminina</button>
                         {% endif %}
                     </div>
                     </p>
