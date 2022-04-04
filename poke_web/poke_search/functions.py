@@ -19,7 +19,7 @@ def get_name_list():
 
 def get_pokemon_list(search_name):
     correct_name_list = get_name_list()
-    input_name_list = get_close_matches(search_name, correct_name_list, n=4)
+    input_name_list = get_close_matches(search_name, correct_name_list, n=3)
 
     pokemon_list = []
 
