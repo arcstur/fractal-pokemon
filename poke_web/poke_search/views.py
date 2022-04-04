@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 import requests
 
 from .functions import get_pokemon_list
@@ -19,12 +18,3 @@ def home(request):
         'pokemon_list': pokemon_list,
     }
     return render(request, 'poke_search/home.html', context)
-
-def pokemon(request):
-    context = {
-        'pokemon': pokemon_list[0],
-    }
-    return render(request, 'poke_search/pokemon.html', context)
-
-def about(request):
-    return HttpResponse('<h1>Sobre</h1>')
