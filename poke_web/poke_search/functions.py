@@ -1,10 +1,10 @@
 import requests
 from difflib import get_close_matches
-
-pokemon_name_list = []
+from django.core.cache import cache
 
 def get_name_list():
-    global pokemon_name_list
+    cache_key = 'pokemon_name_list'
+    pokemon_name_list = cache.get(cache_key)
 
     if not pokemon_name_list:
         pokemon_name_list = []
@@ -14,6 +14,8 @@ def get_name_list():
         for name_dict in response.json()['results']:
             name, url = name_dict.values()
             pokemon_name_list.append(name)
+        
+        cache.set(cache_key, pokemon_name_list)
 
     return pokemon_name_list
 
@@ -31,14 +33,21 @@ def get_pokemon_list(search_name):
     return pokemon_list
             
 def get_poke_from_correct_name(correct_name):
-    url = f'https://pokeapi.co/api/v2/pokemon/{correct_name}'
-    response = requests.get(url)
+    cache_key = f'pokemon_{correct_name}'
+    poke_json = cache.get(cache_key)
 
-    if response.status_code == 200:
-        poke_json = response.json()
+    if poke_json:
         return get_poke_from_json(poke_json)
     else:
-        return ''
+        url = f'https://pokeapi.co/api/v2/pokemon/{correct_name}'
+        response = requests.get(url)
+
+        if response.status_code == 200:
+            poke_json = response.json()
+            cache.set(cache_key, poke_json)
+            return get_poke_from_json(poke_json)
+        else:
+            return ''
 
 def get_species_json(poke_json):
     url = poke_json['species']['url']
