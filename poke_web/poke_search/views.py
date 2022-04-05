@@ -1,5 +1,4 @@
 from django.shortcuts import render
-import requests
 
 from .functions import get_pokemon_list
 
