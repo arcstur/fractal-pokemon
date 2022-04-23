@@ -40,18 +40,18 @@ def get_pokemon_list(search_name):
             
 def get_poke_from_correct_name(correct_name):
     cache_key = f'pokemon_{correct_name}'
-    poke_json = cache.get(cache_key)
+    poke = cache.get(cache_key)
 
-    if poke_json:
-        return get_poke_from_json(poke_json)
+    if poke:
+        return poke
     else:
         url = f'https://pokeapi.co/api/v2/pokemon/{correct_name}'
         response = requests.get(url)
 
         if response.status_code == 200:
-            poke_json = response.json()
-            cache.set(cache_key, poke_json)
-            return get_poke_from_json(poke_json)
+            poke = get_poke_from_json(response.json())
+            cache.set(cache_key, poke)
+            return poke
         else:
             return ''
 
