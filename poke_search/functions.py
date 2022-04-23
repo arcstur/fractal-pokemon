@@ -23,6 +23,12 @@ def get_pokemon_list(search_name):
     correct_name_list = get_name_list()
     input_name_list = get_close_matches(search_name, correct_name_list, n=3)
 
+    for name in correct_name_list:
+        if len(input_name_list) == 3:
+            break
+        if name.startswith(search_name) and (name not in input_name_list):
+            input_name_list.append(name)
+
     pokemon_list = []
 
     if input_name_list:
